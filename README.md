@@ -6,9 +6,11 @@ Foi tirado do site: https://github.com/tankibaj/MariaDB-Replication
 
 
 Command and Usage
+
 ./replica <command>
 
-Command	Description
+Command: 	Description:  
+
 -S, --start, start	Run MariaDB master and slave containers.
 -D, --destroy, destroy	Destroy everything related to replica.
 -s, -status, status	Replica status.
