@@ -1,0 +1,35 @@
+version: '3.8'
+services:
+
+  mariadb_master:
+    build:
+      context: ./master-image
+      dockerfile: Dockerfile
+    container_name: ${MASTER_SERVER}
+    ports:
+      - "3306:3306"
+    restart: unless-stopped
+    env_file:
+      - .env
+    networks:
+      replica:
+
+  mariadb_slave:
+    build:
+      context: ./slave-image
+      dockerfile: Dockerfile
+    container_name: ${SLAVE_SERVER}
+    depends_on:
+      - "mariadb_master"
+    ports:
+      - "4406:3306"
+    restart: unless-stopped
+    env_file:
+      - .env
+    networks:
+      replica:
+
+
+networks:
+  replica:
+    driver: bridge
